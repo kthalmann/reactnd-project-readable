@@ -7,13 +7,13 @@ const headers = {
 }
 
 export const _getCategories = _ => {
-  fetch(`${api}/categories`, { headers })
+  return fetch(`${api}/categories`, { headers })
     .then(res => res.json())
-    .then(data => data)
+    .then(data => data.categories)
 }
 
 export const _getPosts = _ => {
-  fetch(`${api}/posts`, { headers })
+  return fetch(`${api}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
 }
