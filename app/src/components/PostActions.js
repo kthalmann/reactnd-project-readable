@@ -9,11 +9,18 @@ import {
   FiTrash,
   FiTrash2
 } from 'react-icons/fi'
+import { downvotePost, upvotePost } from '../actions/posts'
 
 class PostActions extends Component {
-  onUpvote = _ => {}
+  onUpvote = _ => {
+    this.props.dispatch(upvotePost(this.props.postId))
+  }
+  onDownvote = _ => {
+    this.props.dispatch(downvotePost(this.props.postId))
+  }
 
   render() {
+    console.log(this.props)
     const { voteScore, commentCount } = this.props
 
     return (
@@ -23,11 +30,17 @@ class PostActions extends Component {
           {voteScore}
         </button>
 
-        <button className="post-actions__upvote btn-link">
+        <button
+          className="post-actions__upvote btn-link"
+          onClick={this.onUpvote}
+        >
           <FiArrowUp />
         </button>
 
-        <button className="post-actions__downvote btn-link">
+        <button
+          className="post-actions__downvote btn-link"
+          onClick={this.onDownvote}
+        >
           <FiArrowDown />
         </button>
 

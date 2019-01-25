@@ -35,14 +35,15 @@ label {
   float: right;
 }
 
-.btn-link, .btn-link:hover {
+.btn-link, .btn-link:hover, .btn-link:active, .btn-link:focus {
   border: none;
   box-shadow: none;
   background: none;
   padding-left: .5rem;
   padding-right: .5rem;
+  transform: none;
 }
 
-.btn-link:hover {
-  transform: none;
+.btn-link:hover, .btn-link:focus {
+  color: #ef8425;
 }
