@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { DEFAULT_POST_SORT_METHOD } from '../actions/shared'
+import { setPostSortMethod } from '../actions/postSorting'
 
 class PostListing extends Component {
+  onChange = newSorting => {
+    this.props.dispatch(setPostSortMethod(newSorting))
+  }
+
   render() {
     return (
       <div className="post-listing">
@@ -11,10 +17,10 @@ class PostListing extends Component {
             <label htmlFor="sortMethod">Sort by:</label>
             <select
               id="sortMethod"
-              value={this.props.postSortMethod}
+              value={this.props.postSorting || DEFAULT_POST_SORT_METHOD}
               onChange={e => this.onChange(e.target.value)}
             >
-              <option value="timestamp">Age</option>
+              <option value="age">Age</option>
               <option value="score">Score</option>
             </select>
           </div>
@@ -25,9 +31,9 @@ class PostListing extends Component {
   }
 }
 
-function mapStateToProps({ postSortMethod }) {
+function mapStateToProps({ postSorting }) {
   return {
-    postSortMethod
+    postSorting
   }
 }
 
