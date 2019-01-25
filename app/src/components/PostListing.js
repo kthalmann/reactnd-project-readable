@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { DEFAULT_POST_SORT_METHOD } from '../actions/shared'
 import { setPostSortMethod } from '../actions/postSorting'
+import PostTeaser from './PostTeaser'
 
 class PostListing extends Component {
   onChange = newSorting => {
@@ -25,7 +26,9 @@ class PostListing extends Component {
             </select>
           </div>
         </div>
-        {this.props.postIds.map(post => <div key={post}>{post}</div>)}
+        {this.props.postIds.map(post => (
+          <PostTeaser key={post} postId={post} />
+        ))}
       </div>
     )
   }

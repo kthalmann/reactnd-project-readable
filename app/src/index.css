@@ -22,3 +22,27 @@ label {
 .post-listing__sorting {
   margin-bottom: 0;
 }
+
+.post-teaser {
+    margin-bottom: 20px;
+}
+
+.post-teaser__footer {
+  padding: 0 !important;
+}
+
+.post-actions__delete, .post-actions__edit {
+  float: right;
+}
+
+.btn-link, .btn-link:hover {
+  border: none;
+  box-shadow: none;
+  background: none;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.btn-link:hover {
+  transform: none;
+}
