@@ -1,12 +1,17 @@
 import { RECEIVE_CATEGORIES } from '../actions/categories'
 
 export function categories(state = {}, action) {
-  switch (action.type) {
+  const { type, categories } = action
+
+  switch (type) {
     case RECEIVE_CATEGORIES:
-      return {
-        ...state,
-        ...action.categories
+      if (categories) {
+        return categories.reduce((obj, category) => {
+          obj[category.name] = category
+          return obj
+        }, {})
       }
+      return state
     default:
       return state
   }

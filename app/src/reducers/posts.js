@@ -1,12 +1,17 @@
-import { RECEIVE_POSTS } from '../actions/posts'
+import { RECEIVE_POSTS, SET_POST_SORT_METHOD } from '../actions/posts'
 
 export function posts(state = {}, action) {
-  switch (action.type) {
+  const { type, posts } = action
+
+  switch (type) {
     case RECEIVE_POSTS:
-      return {
-        ...state,
-        ...action.posts
+      if (posts) {
+        return posts.reduce((obj, post) => {
+          obj[post.id] = post
+          return obj
+        }, {})
       }
+      return state
     default:
       return state
   }
