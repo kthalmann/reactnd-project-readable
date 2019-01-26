@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import PostListingView from './PostListingView'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
   componentDidMount() {
@@ -10,11 +11,24 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <PostListingView />
-      </div>
+      <Router>
+        <div className="container">
+          {this.props.loading === true ? null : (
+            <div>
+              <Route path="/" exact component={PostListingView} />
+              <Route path="/:category" component={PostListingView} />
+            </div>
+          )}
+        </div>
+      </Router>
     )
   }
 }
 
-export default connect()(App)
+function mapStateToProps({ posts }) {
+  return {
+    loading: !posts
+  }
+}
+
+export default connect(mapStateToProps)(App)

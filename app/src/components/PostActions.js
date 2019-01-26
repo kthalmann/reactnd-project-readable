@@ -6,7 +6,6 @@ import {
   FiArrowDown,
   FiMessageCircle,
   FiEdit,
-  FiTrash,
   FiTrash2
 } from 'react-icons/fi'
 import { downvotePost, upvotePost } from '../actions/posts'

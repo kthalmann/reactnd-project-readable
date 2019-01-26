@@ -10,23 +10,26 @@ class PostListingView extends Component {
         <hr />
         Button add post
         <hr />
-        <PostListing postIds={this.props.postIds} />
+        <PostListing posts={this.props.posts} category={this.props.category} />
       </div>
     )
   }
 }
 
 function mapStateToProps({ posts }, props) {
-  let category = null
-  if (props.match) {
-    category = props.match.params.category
+  const category = props.match.params.category || null
+
+  // make array
+  posts = Object.keys(posts).map(postId => posts[postId])
+
+  if (category) {
+    // if category is set -> filter by category
+    posts = posts.filter(post => post.category === category)
   }
 
   return {
     category,
-    postIds: Object.keys(posts).sort(
-      (a, b) => posts[b].timestamp - posts[a].timestamp
-    )
+    posts
   }
 }
 

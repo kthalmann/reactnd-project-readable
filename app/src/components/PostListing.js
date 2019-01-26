@@ -10,6 +10,13 @@ class PostListing extends Component {
   }
 
   render() {
+    const { posts, postSorting } = this.props
+
+    // sort posts by sort method and return only ids
+    const postIds = posts
+      .sort((a, b) => b[postSorting] - a[postSorting])
+      .map(post => post.id)
+
     return (
       <div className="post-listing">
         <div className="post-listing__header row flex-edges flex-middle">
@@ -18,24 +25,26 @@ class PostListing extends Component {
             <label htmlFor="sortMethod">Sort by:</label>
             <select
               id="sortMethod"
-              value={this.props.postSorting || DEFAULT_POST_SORT_METHOD}
+              value={postSorting || DEFAULT_POST_SORT_METHOD}
               onChange={e => this.onChange(e.target.value)}
             >
-              <option value="age">Age</option>
+              <option value="timestamp">Age</option>
               <option value="score">Score</option>
             </select>
           </div>
         </div>
-        {this.props.postIds.map(post => (
-          <PostTeaser key={post} postId={post} />
-        ))}
+        {postIds.length === 0 && (
+          <div className="alert alert-secondary">No posts to display</div>
+        )}
+        {postIds.map(post => <PostTeaser key={post} postId={post} />)}
       </div>
     )
   }
 }
 
-function mapStateToProps({ postSorting }) {
+function mapStateToProps({ postSorting }, { posts }) {
   return {
+    posts,
     postSorting
   }
 }

@@ -1,11 +1,6 @@
-import {
-  RECEIVE_POSTS,
-  UPVOTE_POST,
-  DOWNVOTE_POST,
-  SET_POST_SORT_METHOD
-} from '../actions/posts'
+import { RECEIVE_POSTS, UPVOTE_POST, DOWNVOTE_POST } from '../actions/posts'
 
-export function posts(state = {}, action) {
+export function posts(state = null, action) {
   const { type, posts } = action
 
   switch (type) {
