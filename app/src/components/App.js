@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import PostListingView from './PostListingView'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import PostDetailView from './PostDetailView'
 
 class App extends Component {
   componentDidMount() {
@@ -16,7 +17,8 @@ class App extends Component {
           {this.props.loading === true ? null : (
             <div>
               <Route path="/" exact component={PostListingView} />
-              <Route path="/:category" component={PostListingView} />
+              <Route path="/post/:id" exact component={PostDetailView} />
+              <Route path="/:category" exact component={PostListingView} />
             </div>
           )}
         </div>
