@@ -28,6 +28,9 @@ class ShowPost extends Component {
           />
         </p>
         <p>{body}</p>
+        <div className="row">
+          <button onClick={() => this.props.onAddComment()}>Add comment</button>
+        </div>
         <PostActions
           postId={id}
           voteScore={voteScore}
@@ -40,7 +43,8 @@ class ShowPost extends Component {
 
 function mapStateToProps({ posts }, props) {
   return {
-    post: posts[props.postId]
+    post: posts[props.postId],
+    onAddComment: props.onAddComment
   }
 }
 

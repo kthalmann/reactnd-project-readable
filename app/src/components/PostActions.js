@@ -19,7 +19,6 @@ class PostActions extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { voteScore, commentCount } = this.props
 
     return (

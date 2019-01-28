@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { FormattedRelative } from 'react-intl'
+import CommentActions from './CommentActions'
 
 class Comment extends Component {
   render() {
-    const { timestamp, author, body } = this.props.comment
+    const { id, timestamp, author, body, voteScore } = this.props.comment
+    const { onVote } = this.props
 
     return (
       <div className="comment card shadow shadow-small">
@@ -16,7 +18,13 @@ class Comment extends Component {
           </div>
           <div className="comment__body">{body}</div>
         </div>
-        <div className="card-footer">Comment actions</div>
+        <div className="card-footer">
+          <CommentActions
+            commentId={id}
+            voteScore={voteScore}
+            onVote={onVote}
+          />
+        </div>
       </div>
     )
   }
