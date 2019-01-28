@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { _getCommentsForPost } from '../utils/api'
 import CommentListing from './CommentListing'
+import ShowPost from './ShowPost'
 
 class PostDetailView extends Component {
   state = {
@@ -12,7 +13,6 @@ class PostDetailView extends Component {
 
   componentDidMount() {
     _getCommentsForPost(this.props.postId).then(comments => {
-      console.log(comments)
       this.setState(previousState => ({
         comments,
         loading: false
@@ -25,10 +25,12 @@ class PostDetailView extends Component {
   render() {
     return (
       <div>
-        Show Post
+        <ShowPost postId={this.props.postId} />
         <hr />
-        {this.state.loading && <div>loading...</div>}
-        <CommentListing comments={this.state.comments} />
+        <CommentListing
+          comments={this.state.comments}
+          loading={this.state.loading}
+        />
       </div>
     )
   }
