@@ -8,12 +8,15 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import middleware from './middleware'
+import { IntlProvider } from 'react-intl'
 
 const store = createStore(reducer, middleware)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <IntlProvider locale="en">
+      <App />
+    </IntlProvider>
   </Provider>,
   document.getElementById('root')
 )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostActions from './PostActions'
+import { FormattedDate } from 'react-intl'
 
 class ShowPost extends Component {
   render() {
@@ -18,7 +19,13 @@ class ShowPost extends Component {
       <article className="post article">
         <h1 className="article-title">{title}</h1>
         <p className="article-meta">
-          Written by #{author} on {timestamp}
+          Written by <span className="text-secondary">#{author}</span> on{' '}
+          <FormattedDate
+            value={timestamp}
+            day="numeric"
+            month="long"
+            year="numeric"
+          />
         </p>
         <p>{body}</p>
         <PostActions
