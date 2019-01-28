@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { format } from 'timeago.js'
+import TimeAgo from 'timeago-react'
 
 class Comment extends Component {
   render() {
@@ -11,7 +11,7 @@ class Comment extends Component {
           <div className="comment__meta card-subtitle">
             <span className="comment__author text-secondary">#{author}</span>
             <span className="comment__date text-muted">
-              {format(timestamp)}
+              <TimeAgo datetime={timestamp} />
             </span>
           </div>
           <div className="comment__body">{body}</div>
