@@ -81,6 +81,16 @@ class PostDetailView extends Component {
           loading={this.state.isLoading}
           onVote={this.handleVoteOnComment}
         />
+        {this.state.isCommentFormVisible && (
+          <CommentForm
+            comment={this.state.comments.find(
+              comment => comment.id === this.state.commentEditing
+            )}
+            onClose={this.handleCloseCommentForm}
+            onCreate={this.handleCreateComment}
+            onUpdate={this.handleUpdateComment}
+          />
+        )}
       </div>
     )
   }
