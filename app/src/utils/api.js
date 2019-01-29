@@ -33,3 +33,18 @@ export const _voteOnComment = (commentId, isUpvote) => {
     body: JSON.stringify({ option: isUpvote ? 'upVote' : 'downVote' })
   }).then(res => res.json())
 }
+
+export const _addComment = comment => {
+  return fetch(`${api}/comments`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(comment)
+  }).then(res => res.json())
+}
+
+export const _deleteComment = commentId => {
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers
+  }).then(res => res.json())
+}

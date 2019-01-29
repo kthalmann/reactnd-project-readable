@@ -9,7 +9,7 @@ import {
 
 class CommentActions extends Component {
   render() {
-    const { commentId, voteScore, onVote } = this.props
+    const { commentId, voteScore, onVote, onEdit, onDelete } = this.props
 
     return (
       <div className="comment-actions">
@@ -32,11 +32,17 @@ class CommentActions extends Component {
           <FiArrowDown />
         </button>
 
-        <button className="comment-actions__delete btn-link">
+        <button
+          className="comment-actions__delete btn-link"
+          onClick={() => onDelete(commentId)}
+        >
           <FiTrash2 />
         </button>
 
-        <button className="comment-actions__edit btn-link">
+        <button
+          className="comment-actions__edit btn-link"
+          onClick={() => onEdit(commentId)}
+        >
           <FiEdit />
         </button>
       </div>

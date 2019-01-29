@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 // import { handleReceiveCommentsForPost } from '../actions/comments'
 import { connect } from 'react-redux'
-import { _getCommentsForPost } from '../utils/api'
+import {
+  _getCommentsForPost,
+  _voteOnComment,
+  _addComment,
+  _deleteComment
+} from '../utils/api'
 import CommentListing from './CommentListing'
 import ShowPost from './ShowPost'
 import CommentForm from './CommentForm'
-import { _voteOnComment } from '../utils/api'
+import { generateUID } from '../utils/uid'
 
 class PostDetailView extends Component {
   state = {
@@ -26,9 +31,44 @@ class PostDetailView extends Component {
     // this.props.dispatch(handleReceiveCommentsForPost(this.props.postId))
   }
 
-  handleAddComment = () => {}
+  /**
+   * @param author
+   * @param body
+   */
+  handleCreateComment = (author, body) => {
+    // build new comment object
+    const newComment = {
+      id: generateUID(),
+      timestamp: +Date.now(),
+      body,
+      author,
+      parentId: this.props.postId
+    }
 
-  handleEditComment = (commentId, body) => {}
+    _addComment(newComment).then(newComment => {
+      // add new comment returned from server to state
+      this.setState(previousState => ({
+        comments: previousState.comments.concat(newComment)
+      }))
+    })
+  }
+
+  handleUpdateComment = (commentId, author, body) => {
+    console.log('handle update comment', commentId, body)
+  }
+
+  /**
+   * @param commentId
+   */
+  handleDeleteComment = commentId => {
+    _deleteComment(commentId).then(
+      this.setState(previousState => ({
+        comments: previousState.comments.filter(
+          comment => comment.id !== commentId
+        )
+      }))
+    )
+  }
 
   /**
    * @param commentId
@@ -60,6 +100,14 @@ class PostDetailView extends Component {
     }))
   }
 
+  handleEditComment = commentId => {
+    this.setState(previousState => ({
+      ...previousState,
+      isCommentFormVisible: true,
+      commentEditing: commentId
+    }))
+  }
+
   handleCloseCommentForm = () => {
     this.setState(previousState => ({
       ...previousState,
@@ -80,6 +128,8 @@ class PostDetailView extends Component {
           comments={this.state.comments}
           loading={this.state.isLoading}
           onVote={this.handleVoteOnComment}
+          onEdit={this.handleEditComment}
+          onDelete={this.handleDeleteComment}
         />
         {this.state.isCommentFormVisible && (
           <CommentForm

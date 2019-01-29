@@ -5,7 +5,7 @@ import CommentActions from './CommentActions'
 class Comment extends Component {
   render() {
     const { id, timestamp, author, body, voteScore } = this.props.comment
-    const { onVote } = this.props
+    const { onVote, onEdit, onDelete } = this.props
 
     return (
       <div className="comment card shadow shadow-small">
@@ -23,6 +23,8 @@ class Comment extends Component {
             commentId={id}
             voteScore={voteScore}
             onVote={onVote}
+            onEdit={onEdit}
+            onDelete={onDelete}
           />
         </div>
       </div>
