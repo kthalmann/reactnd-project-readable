@@ -26,6 +26,14 @@ export const _getCommentsForPost = postId => {
     .then(data => data)
 }
 
+export const _voteOnPost = (postId, isUpvote) => {
+  return fetch(`${api}/posts/${postId}`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ option: isUpvote ? 'upVote' : 'downVote' })
+  }).then(res => res.json())
+}
+
 export const _voteOnComment = (commentId, isUpvote) => {
   return fetch(`${api}/comments/${commentId}`, {
     method: 'POST',

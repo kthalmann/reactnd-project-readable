@@ -8,14 +8,14 @@ import {
   FiEdit,
   FiTrash2
 } from 'react-icons/fi'
-import { downvotePost, upvotePost } from '../actions/posts'
+import { handleUpvotePost, handleDownvotePost } from '../actions/posts'
 
 class PostActions extends Component {
   onUpvote = _ => {
-    this.props.dispatch(upvotePost(this.props.postId))
+    this.props.dispatch(handleUpvotePost(this.props.postId))
   }
   onDownvote = _ => {
-    this.props.dispatch(downvotePost(this.props.postId))
+    this.props.dispatch(handleDownvotePost(this.props.postId))
   }
 
   render() {
