@@ -92,3 +92,22 @@ label {
 .comment-input {
   width: 500px;
 }
+
+/* Post Form */
+.post-form {
+  padding: 40px;
+}
+
+.post-form label {
+  display: block;
+}
+
+.post-form__input {
+  width: 100%;
+}
+
+.post-form__button {
+  width: 150px;
+  float: right;
+  margin-left: 20px;
+}
