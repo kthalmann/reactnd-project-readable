@@ -61,13 +61,20 @@ class PostDetailView extends Component {
    * @param commentId
    */
   handleDeleteComment = commentId => {
-    _deleteComment(commentId).then(
-      this.setState(previousState => ({
-        comments: previousState.comments.filter(
-          comment => comment.id !== commentId
-        )
-      }))
-    )
+    // make copy of current state in case api call goes bad
+    const resetState = JSON.parse(JSON.stringify(this.state))
+
+    this.setState(previousState => ({
+      comments: previousState.comments.filter(
+        comment => comment.id !== commentId
+      )
+    }))
+
+    _deleteComment(commentId).catch(_ => {
+      alert('An error occurred during voting. Please refresh the page.')
+      // if failed -> reset our state
+      this.setState(resetState)
+    })
   }
 
   /**
@@ -75,6 +82,9 @@ class PostDetailView extends Component {
    * @param thumbsUp
    */
   handleVoteOnComment = (commentId, thumbsUp) => {
+    // make copy of current state in case api call goes bad
+    const resetState = JSON.parse(JSON.stringify(this.state))
+
     this.setState(previousState => ({
       ...previousState,
       comments: previousState.comments.map(comment => {
@@ -88,8 +98,10 @@ class PostDetailView extends Component {
       })
     }))
 
-    _voteOnComment(commentId, thumbsUp).then(res => {
-      console.log(res)
+    _voteOnComment(commentId, thumbsUp).catch(_ => {
+      alert('An error occurred during voting. Please refresh the page.')
+      // if failed -> reset our state
+      this.setState(resetState)
     })
   }
 
