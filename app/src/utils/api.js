@@ -48,3 +48,11 @@ export const _deleteComment = commentId => {
     headers
   }).then(res => res.json())
 }
+
+export const _updateComment = (commentId, timestamp, body) => {
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ timestamp, body })
+  }).then(res => res.json())
+}

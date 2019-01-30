@@ -5,18 +5,12 @@ class CommentForm extends Component {
     this.props.onCreate(this.authorInput.value, this.bodyTextInput.value)
   }
   handleUpdate = _ => {
-    this.props.onUpdate(
-      this.props.comment.id,
-      this.authorInput.value,
-      this.bodyTextInput.value
-    )
+    this.props.onUpdate(this.props.comment.id, this.bodyTextInput.value)
   }
 
   render() {
     const { onClose, onCreate, onUpdate } = this.props
     const isNewComment = !this.props.comment
-
-    console.log(this.props)
 
     return (
       <div className="modal">
@@ -28,15 +22,17 @@ class CommentForm extends Component {
           <h4 className="modal-title">
             {isNewComment ? 'Add' : 'Edit'} comment
           </h4>
-          <div className="form-group">
-            <label htmlFor="author">Author</label>
-            <input
-              type="text"
-              id="author"
-              defaultValue={isNewComment ? '' : this.props.comment.author}
-              ref={input => (this.authorInput = input)}
-            />
-          </div>
+          {isNewComment && (
+            <div className="form-group">
+              <label htmlFor="author">Author</label>
+              <input
+                type="text"
+                id="author"
+                defaultValue={isNewComment ? '' : this.props.comment.author}
+                ref={input => (this.authorInput = input)}
+              />
+            </div>
+          )}
           <div className="form-group">
             <label htmlFor="body-text">Message</label>
             <textarea

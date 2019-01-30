@@ -5,7 +5,8 @@ import {
   _getCommentsForPost,
   _voteOnComment,
   _addComment,
-  _deleteComment
+  _deleteComment,
+  _updateComment
 } from '../utils/api'
 import CommentListing from './CommentListing'
 import ShowPost from './ShowPost'
@@ -48,13 +49,44 @@ class PostDetailView extends Component {
     _addComment(newComment).then(newComment => {
       // add new comment returned from server to state
       this.setState(previousState => ({
-        comments: previousState.comments.concat(newComment)
+        comments: previousState.comments.concat(newComment),
+        isCommentFormVisible: false
       }))
     })
   }
 
-  handleUpdateComment = (commentId, author, body) => {
-    console.log('handle update comment', commentId, body)
+  /**
+   *
+   * @param commentId
+   * @param body
+   */
+  handleUpdateComment = (commentId, body) => {
+    // make copy of current state in case api call goes bad
+    const resetState = JSON.parse(JSON.stringify(this.state))
+
+    this.setState(previousState => ({
+      isCommentFormVisible: false,
+      commentEditing: null,
+      comments: previousState.comments.map(comment => {
+        if (comment.id === commentId) {
+          comment.body = body
+          comment.timestamp = +Date.now()
+        }
+
+        return comment
+      })
+    }))
+
+    _updateComment(commentId, +Date.now(), body).catch(_ => {
+      alert(
+        'An error occurred during updating the comment. Please refresh the page.'
+      )
+      // if failed -> reset our state
+      this.setState({
+        ...resetState,
+        isCommentFormVisible: false
+      })
+    })
   }
 
   /**
@@ -71,7 +103,9 @@ class PostDetailView extends Component {
     }))
 
     _deleteComment(commentId).catch(_ => {
-      alert('An error occurred during voting. Please refresh the page.')
+      alert(
+        'An error occurred during deleting the comment. Please refresh the page.'
+      )
       // if failed -> reset our state
       this.setState(resetState)
     })
@@ -86,7 +120,6 @@ class PostDetailView extends Component {
     const resetState = JSON.parse(JSON.stringify(this.state))
 
     this.setState(previousState => ({
-      ...previousState,
       comments: previousState.comments.map(comment => {
         if (comment.id === commentId) {
           comment.voteScore = thumbsUp
