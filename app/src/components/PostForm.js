@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { generateUID } from '../utils/uid'
+import { handleAddPost } from '../actions/posts'
 
 class PostForm extends Component {
-  state = {
+  initialState = {
     authorInput: '',
     titleInput: '',
     categoryInput: '',
@@ -11,6 +13,8 @@ class PostForm extends Component {
 
   constructor(props) {
     super(props)
+
+    this.state = this.initialState
 
     if (!this.props.post) return
 
@@ -31,6 +35,25 @@ class PostForm extends Component {
     })
   }
 
+  handleSubmit = e => {
+    e.preventDefault()
+
+    const { titleInput, bodyInput, authorInput, categoryInput } = this.state
+
+    const newPost = {
+      id: generateUID(),
+      timestamp: +Date.now(),
+      title: titleInput,
+      body: bodyInput,
+      author: authorInput,
+      category: categoryInput
+    }
+
+    this.props.dispatch(handleAddPost(newPost))
+
+    this.setState(this.initialState)
+  }
+
   isSubmitable = _ => {
     const { authorInput, titleInput, categoryInput, bodyInput } = this.state
 
@@ -46,6 +69,7 @@ class PostForm extends Component {
         <form
           action=""
           className="post-form background-primary border border-primary"
+          onSubmit={this.handleSubmit}
         >
           <div className="row">
             <div className="col-3 col">

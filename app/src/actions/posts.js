@@ -1,8 +1,38 @@
-import { _voteOnPost } from '../utils/api'
+import { _voteOnPost, _addPost, _deletePost } from '../utils/api'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export const ADD_POST = 'ADD_POST'
+export const DELETE_POST = 'DELETE_POST'
 export const UPVOTE_POST = 'UPVOTE_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
+
+function addPost(post) {
+  return {
+    type: ADD_POST,
+    post
+  }
+}
+
+function deletePost(id) {
+  return {
+    type: DELETE_POST,
+    id
+  }
+}
+
+function upvotePost(id) {
+  return {
+    type: UPVOTE_POST,
+    id
+  }
+}
+
+function downvotePost(id) {
+  return {
+    type: DOWNVOTE_POST,
+    id
+  }
+}
 
 export function receivePosts(posts) {
   return {
@@ -11,10 +41,28 @@ export function receivePosts(posts) {
   }
 }
 
-function upvotePost(id) {
-  return {
-    type: UPVOTE_POST,
-    id
+export function handleAddPost(post) {
+  return dispatch => {
+    dispatch(addPost(post))
+
+    _addPost(post).catch(e => {
+      dispatch(deletePost(post.id))
+      alert('An error occurred during creating post. Please refresh the page.')
+    })
+  }
+}
+
+export function handleDeletePost(id) {
+  return dispatch => {
+    _deletePost(id)
+      .then(e => {
+        dispatch(deletePost(id))
+      })
+      .catch(_ =>
+        alert(
+          'An error occurred during creating post. Please refresh the page.'
+        )
+      )
   }
 }
 
@@ -26,13 +74,6 @@ export function handleUpvotePost(id) {
       dispatch(downvotePost(id))
       alert('An error occurred during voting. Please refresh the page.')
     })
-  }
-}
-
-function downvotePost(id) {
-  return {
-    type: DOWNVOTE_POST,
-    id
   }
 }
 

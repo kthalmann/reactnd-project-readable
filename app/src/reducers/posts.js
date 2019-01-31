@@ -1,7 +1,14 @@
-import { RECEIVE_POSTS, UPVOTE_POST, DOWNVOTE_POST } from '../actions/posts'
+import {
+  RECEIVE_POSTS,
+  UPVOTE_POST,
+  DOWNVOTE_POST,
+  ADD_POST,
+  DELETE_POST
+} from '../actions/posts'
+import { removeProperty } from '../utils/removeProperty'
 
 export function posts(state = null, action) {
-  const { type, posts } = action
+  const { type, post, posts } = action
 
   switch (type) {
     case RECEIVE_POSTS:
@@ -12,6 +19,13 @@ export function posts(state = null, action) {
         }, {})
       }
       return state
+    case ADD_POST:
+      return {
+        ...state,
+        [post.id]: post
+      }
+    case DELETE_POST:
+      return removeProperty(state, action.id)
     case UPVOTE_POST:
       return {
         ...state,

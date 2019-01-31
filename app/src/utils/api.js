@@ -34,6 +34,21 @@ export const _voteOnPost = (postId, isUpvote) => {
   }).then(res => res.json())
 }
 
+export const _addPost = post => {
+  return fetch(`${api}/posts`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(post)
+  }).then(res => res.json())
+}
+
+export const _deletePost = postId => {
+  return fetch(`${api}/posts/${postId}`, {
+    method: 'DELETE',
+    headers
+  }).then(res => res.json())
+}
+
 export const _voteOnComment = (commentId, isUpvote) => {
   return fetch(`${api}/comments/${commentId}`, {
     method: 'POST',

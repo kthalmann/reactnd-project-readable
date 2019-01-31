@@ -8,7 +8,11 @@ import {
   FiEdit,
   FiTrash2
 } from 'react-icons/fi'
-import { handleUpvotePost, handleDownvotePost } from '../actions/posts'
+import {
+  handleUpvotePost,
+  handleDownvotePost,
+  handleDeletePost
+} from '../actions/posts'
 
 class PostActions extends Component {
   onUpvote = _ => {
@@ -16,6 +20,9 @@ class PostActions extends Component {
   }
   onDownvote = _ => {
     this.props.dispatch(handleDownvotePost(this.props.postId))
+  }
+  onDelete = _ => {
+    this.props.dispatch(handleDeletePost(this.props.postId))
   }
 
   render() {
@@ -47,7 +54,10 @@ class PostActions extends Component {
           {commentCount}
         </button>
 
-        <button className="post-actions__delete btn-link">
+        <button
+          className="post-actions__delete btn-link"
+          onClick={this.onDelete}
+        >
           <FiTrash2 />
         </button>
 
