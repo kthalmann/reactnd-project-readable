@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import {
   FiHeart,
   FiArrowUp,
@@ -23,7 +23,18 @@ class PostActions extends Component {
     this.props.dispatch(handleDownvotePost(this.props.postId))
   }
   onDelete = _ => {
-    this.props.dispatch(handleDeletePost(this.props.postId))
+    this.props.dispatch(
+      handleDeletePost(this.props.postId, this.onDeleteCallbackHandler)
+    )
+  }
+
+  /**
+   * if detail page is showing -> go to home
+   */
+  onDeleteCallbackHandler = _ => {
+    const { postId, location, history } = this.props
+
+    if (location.pathname === `/post/${postId}`) history.push('/')
   }
 
   render() {
@@ -73,10 +84,4 @@ class PostActions extends Component {
   }
 }
 
-function mapStateToProps({ posts }, { postId }) {
-  return {
-    post: posts[postId]
-  }
-}
-
-export default connect()(PostActions)
+export default withRouter(connect()(PostActions))

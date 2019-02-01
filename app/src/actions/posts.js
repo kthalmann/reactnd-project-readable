@@ -57,9 +57,10 @@ export function handleAddPost(post, cb) {
   }
 }
 
-export function handleDeletePost(id) {
+export function handleDeletePost(id, cb) {
   return dispatch => {
     _deletePost(id)
+      .then(() => cb())
       .then(e => {
         dispatch(deletePost(id))
       })
