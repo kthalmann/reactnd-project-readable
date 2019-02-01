@@ -46,6 +46,10 @@ label {
   width: auto;
 }
 
+.category-nav__link.active {
+    font-weight: bold;
+}
+
 /* Post Listing */
 .post-listing__header {
   border-bottom: 1px solid;

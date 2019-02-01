@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { NavLink, Link, withRouter } from 'react-router-dom'
 import { capitalize } from '../utils'
 
 class CategoryNavigation extends Component {
@@ -25,9 +25,13 @@ class CategoryNavigation extends Component {
             <ul className="inline">
               {this.props.categories.map(category => (
                 <li key={category.name}>
-                  <Link to={`/${category.name}`}>
+                  <NavLink
+                    to={`/${category.name}`}
+                    className="category-nav__link"
+                    activeClassName="active"
+                  >
                     {capitalize(category.name)}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -46,4 +50,4 @@ function mapStateToProps({ categories }) {
   }
 }
 
-export default connect(mapStateToProps)(CategoryNavigation)
+export default withRouter(connect(mapStateToProps)(CategoryNavigation))
