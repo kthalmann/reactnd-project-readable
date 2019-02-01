@@ -11,7 +11,7 @@ import {
 import CommentListing from './CommentListing'
 import ShowPost from './ShowPost'
 import CommentForm from './CommentForm'
-import { generateUID } from '../utils/uid'
+import { generateUID } from '../utils/index'
 
 class PostDetailView extends Component {
   state = {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { generateUID } from '../utils/uid'
+import { generateUID } from '../utils/index'
 import { handleAddPost } from '../actions/posts'
 
 class PostForm extends Component {

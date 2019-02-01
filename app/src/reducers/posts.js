@@ -5,7 +5,7 @@ import {
   ADD_POST,
   DELETE_POST
 } from '../actions/posts'
-import { removeProperty } from '../utils/removeProperty'
+import { removeProperty } from '../utils/index'
 
 export function posts(state = null, action) {
   const { type, post, posts } = action
