@@ -22,17 +22,16 @@ class CommentForm extends Component {
           <h4 className="modal-title">
             {isNewComment ? 'Add' : 'Edit'} comment
           </h4>
-          {isNewComment && (
-            <div className="form-group">
-              <label htmlFor="author">Author</label>
-              <input
-                type="text"
-                id="author"
-                defaultValue={isNewComment ? '' : this.props.comment.author}
-                ref={input => (this.authorInput = input)}
-              />
-            </div>
-          )}
+          <div className="form-group">
+            <label htmlFor="author">Author</label>
+            <input
+              type="text"
+              id="author"
+              disabled={!isNewComment}
+              defaultValue={isNewComment ? '' : this.props.comment.author}
+              ref={input => (this.authorInput = input)}
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="body-text">Message</label>
             <textarea
