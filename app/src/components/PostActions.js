@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   FiHeart,
   FiArrowUp,
@@ -26,7 +27,7 @@ class PostActions extends Component {
   }
 
   render() {
-    const { voteScore, commentCount } = this.props
+    const { postId, voteScore, commentCount } = this.props
 
     return (
       <div className="post-actions">
@@ -61,9 +62,12 @@ class PostActions extends Component {
           <FiTrash2 />
         </button>
 
-        <button className="post-actions__edit btn-link">
+        <Link
+          to={`/post/${postId}/edit`}
+          className="post-actions__edit btn-link text-primary"
+        >
           <FiEdit />
-        </button>
+        </Link>
       </div>
     )
   }
