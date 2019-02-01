@@ -12,8 +12,6 @@ class PostListing extends Component {
   render() {
     const { posts, postSorting } = this.props
 
-    console.log(postSorting)
-
     // sort posts by sort method and return only ids
     const postIds = posts
       .sort((a, b) => b[postSorting] - a[postSorting])

@@ -43,9 +43,10 @@ export function receivePosts(posts) {
 
 export function handleAddPost(post, cb) {
   return dispatch => {
-    dispatch(addPost(post))
-
     _addPost(post)
+      .then(res => {
+        dispatch(addPost(res))
+      })
       .then(() => cb(post.id))
       .catch(e => {
         dispatch(deletePost(post.id))
