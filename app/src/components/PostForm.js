@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { generateUID } from '../utils/index'
 import { handleAddPost } from '../actions/posts'
+import { withRouter } from 'react-router-dom'
 
 class PostForm extends Component {
   initialState = {
@@ -14,7 +15,15 @@ class PostForm extends Component {
   constructor(props) {
     super(props)
 
-    this.state = this.initialState
+    // get category from query parameter
+    const category = props.categories.find(
+      category => category.name === props.category
+    )
+
+    this.state = {
+      ...this.initialState,
+      categoryInput: category ? category.name : ''
+    }
 
     if (!this.props.post) return
 
@@ -26,6 +35,11 @@ class PostForm extends Component {
     }
   }
 
+  /**
+   * Handle change of input values
+   *
+   * @param e
+   */
   handleChange = e => {
     const field = e.target.name
     const value = e.target.value
@@ -35,11 +49,17 @@ class PostForm extends Component {
     })
   }
 
+  /**
+   * Handle submission of form
+   *
+   * @param e
+   */
   handleSubmit = e => {
     e.preventDefault()
 
     const { titleInput, bodyInput, authorInput, categoryInput } = this.state
 
+    // build new post object
     const newPost = {
       id: generateUID(),
       timestamp: +Date.now(),
@@ -49,11 +69,26 @@ class PostForm extends Component {
       category: categoryInput
     }
 
-    this.props.dispatch(handleAddPost(newPost))
+    this.props.dispatch(handleAddPost(newPost, this.redirect))
 
+    // reset input fields
     this.setState(this.initialState)
   }
 
+  /**
+   * Navigate to post detail view
+   *
+   * @param postId
+   */
+  redirect = postId => {
+    this.props.history.push(`/post/${postId}`)
+  }
+
+  /**
+   * Check if form is allowed to submit
+   *
+   * @returns boolean
+   */
   isSubmitable = _ => {
     const { authorInput, titleInput, categoryInput, bodyInput } = this.state
 
@@ -61,8 +96,9 @@ class PostForm extends Component {
   }
 
   render() {
-    const isNewPost = !this.props.post
+    const { post, category } = this.props
     const { authorInput, titleInput, categoryInput, bodyInput } = this.state
+    const isNewPost = !post
 
     return (
       <div>
@@ -112,11 +148,14 @@ class PostForm extends Component {
                 id="category"
                 className="post-form__input"
                 disabled={!isNewPost}
-                value={categoryInput}
+                value={categoryInput ? categoryInput : category}
                 onChange={this.handleChange}
               >
+                <option value="">Choose category</option>
                 {this.props.categories.map(category => (
-                  <option value={category.name}>{category.name}</option>
+                  <option key={category.name} value={category.name}>
+                    {category.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -163,4 +202,4 @@ function mapStateToProps({ categories }) {
   }
 }
 
-export default connect(mapStateToProps)(PostForm)
+export default withRouter(connect(mapStateToProps)(PostForm))

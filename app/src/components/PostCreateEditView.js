@@ -4,14 +4,16 @@ import PostForm from './PostForm'
 
 class PostCreateEditView extends Component {
   render() {
-    console.log(this.props)
+    const { post, location } = this.props
 
-    const isNewPost = !this.props.post
+    let params = new URLSearchParams(location.search)
+
+    const isNewPost = !post
 
     return (
       <div>
         <h1>{isNewPost ? 'New' : 'Edit'} Post</h1>
-        <PostForm post={this.props.post} />
+        <PostForm post={post} category={params.get('category')} />
       </div>
     )
   }
