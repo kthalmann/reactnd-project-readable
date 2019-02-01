@@ -34,7 +34,7 @@ class PostListing extends Component {
           </div>
         </div>
         {postIds.length === 0 && (
-          <div className="alert alert-secondary">No posts to display</div>
+          <div className="alert alert-warning">No posts to display</div>
         )}
         {postIds.map(post => <PostTeaser key={post} postId={post} />)}
       </div>
