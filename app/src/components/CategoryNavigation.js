@@ -5,7 +5,6 @@ import { capitalize } from '../utils'
 
 class CategoryNavigation extends Component {
   render() {
-    console.log(this.props)
     return (
       <nav className="category-nav border fixed split-nav">
         <div className="nav-brand">

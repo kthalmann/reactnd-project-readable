@@ -9,8 +9,8 @@ class CommentForm extends Component {
   }
 
   render() {
-    const { onClose, onCreate, onUpdate } = this.props
-    const isNewComment = !this.props.comment
+    const { comment, onClose } = this.props
+    const isNewComment = !comment
 
     return (
       <div className="modal">

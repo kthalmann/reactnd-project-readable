@@ -185,7 +185,13 @@ class PostForm extends Component {
               >
                 Submit
               </button>
-              <button className="post-form__button">Cancel</button>
+              <button
+                type="button"
+                className="post-form__button"
+                onClick={this.props.history.goBack}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </form>
