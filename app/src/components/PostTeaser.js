@@ -2,15 +2,31 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostActions from './PostActions'
 import { Link, withRouter } from 'react-router-dom'
+import { FormattedDate } from 'react-intl'
 
 class PostTeaser extends Component {
   render() {
-    const { id, title, author, voteScore, commentCount } = this.props.post
+    const {
+      id,
+      title,
+      author,
+      timestamp,
+      voteScore,
+      commentCount
+    } = this.props.post
     return (
       <div className="post-teaser card">
         <Link to={`/post/${id}`} className="card-body">
           <h4 className="post-teaser__title card-title">{title}</h4>
-          <h5 className="post-teaser__author card-subtitle">{author}</h5>
+          <p className="post-teaser__author">
+            <span className="text-secondary">#{author}</span> on{' '}
+            <FormattedDate
+              value={timestamp}
+              day="numeric"
+              month="long"
+              year="numeric"
+            />
+          </p>
         </Link>
         <div className="post-teaser__footer card-footer">
           <PostActions

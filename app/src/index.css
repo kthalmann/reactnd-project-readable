@@ -22,10 +22,15 @@ h3 {
 .modal {
   opacity: 1;
   visibility: visible;
+    z-index: 1000;
 }
 
 .modal .modal-body {
   top: 50%;
+}
+
+.modal button {
+    float: right;
 }
 
 label {
@@ -41,10 +46,7 @@ label {
   width: auto;
 }
 
-.post-listing {
-
-}
-
+/* Post Listing */
 .post-listing__header {
   border-bottom: 1px solid;
 }
@@ -53,8 +55,14 @@ label {
   margin-bottom: 0;
 }
 
+/* Post Teaser */
 .post-teaser {
     margin-bottom: 20px;
+}
+
+.post-teaser__author {
+    font-size: .8em;
+    margin-bottom: 0 !important;
 }
 
 .post-teaser__footer {
