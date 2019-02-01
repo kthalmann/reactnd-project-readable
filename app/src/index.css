@@ -69,8 +69,15 @@ label {
   padding: 0 !important;
 }
 
+/* Post Actions */
+
 .post-actions__delete, .post-actions__edit {
   float: right;
+}
+
+.post-actions__edit {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
 }
 
 .btn-link, .btn-link:hover, .btn-link:active, .btn-link:focus {
@@ -117,6 +124,7 @@ label {
 /* Post Form */
 .post-form {
   padding: 40px;
+    background-color: #f1f1f1;
 }
 
 .post-form label {

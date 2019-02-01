@@ -104,7 +104,7 @@ class PostForm extends Component {
       <div>
         <form
           action=""
-          className="post-form background-primary border border-primary"
+          className="post-form border border-dashed"
           onSubmit={this.handleSubmit}
         >
           <div className="row">
