@@ -12,6 +12,8 @@ class PostListing extends Component {
   render() {
     const { posts, postSorting } = this.props
 
+    console.log(postSorting)
+
     // sort posts by sort method and return only ids
     const postIds = posts
       .sort((a, b) => b[postSorting] - a[postSorting])
@@ -29,7 +31,7 @@ class PostListing extends Component {
               onChange={e => this.onChange(e.target.value)}
             >
               <option value="timestamp">Age</option>
-              <option value="score">Score</option>
+              <option value="voteScore">Score</option>
             </select>
           </div>
         </div>
