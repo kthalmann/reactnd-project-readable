@@ -41,14 +41,18 @@ export function receivePosts(posts) {
   }
 }
 
-export function handleAddPost(post) {
+export function handleAddPost(post, cb) {
   return dispatch => {
     dispatch(addPost(post))
 
-    _addPost(post).catch(e => {
-      dispatch(deletePost(post.id))
-      alert('An error occurred during creating post. Please refresh the page.')
-    })
+    _addPost(post)
+      .then(() => cb(post.id))
+      .catch(e => {
+        dispatch(deletePost(post.id))
+        alert(
+          'An error occurred during creating post. Please refresh the page.'
+        )
+      })
   }
 }
 

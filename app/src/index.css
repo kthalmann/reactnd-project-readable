@@ -1,3 +1,7 @@
+body {
+  padding: 2em;
+}
+
 a {
   background: none;
 }
@@ -12,6 +16,7 @@ h3 {
 
 .container {
   max-width: 800px;
+  padding-top: 5em;
 }
 
 .modal {
@@ -26,6 +31,14 @@ h3 {
 label {
   /*float: left;*/
   margin-right: 20px;
+}
+
+/* Category Navigation */
+.category-nav.fixed {
+  left: 1em;
+  top: 1em;
+  right: 1em;
+  width: auto;
 }
 
 .post-listing {

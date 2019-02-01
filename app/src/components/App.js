@@ -5,6 +5,7 @@ import PostListingView from './PostListingView'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import PostDetailView from './PostDetailView'
 import PostCreateEditView from './PostCreateEditView'
+import CategoryNavigation from './CategoryNavigation'
 
 class App extends Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ class App extends Component {
         <div className="container">
           {this.props.loading === true ? null : (
             <div>
+              <CategoryNavigation />
               <Switch>
                 <Route path="/" exact component={PostListingView} />
                 <Route path="/post/new" component={PostCreateEditView} />

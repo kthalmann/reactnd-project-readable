@@ -1,16 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostListing from './PostListing'
+import { Link } from 'react-router-dom'
+import { capitalize } from '../utils'
 
 class PostListingView extends Component {
   render() {
+    const { posts, category } = this.props
+
     return (
       <div className="post-listing-view">
-        Category Navigation
         <hr />
-        Button add post
+        <div className="row flex-center">
+          <Link
+            to={{
+              pathname: '/post/new',
+              search: category ? `?category=${category}` : null
+            }}
+            className="paper-btn"
+          >
+            New Post {category && `in «${capitalize(category)}»`}
+          </Link>
+        </div>
         <hr />
-        <PostListing posts={this.props.posts} category={this.props.category} />
+        <PostListing posts={posts} category={category} />
       </div>
     )
   }
