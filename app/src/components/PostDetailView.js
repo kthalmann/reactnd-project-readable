@@ -28,8 +28,6 @@ class PostDetailView extends Component {
         isLoading: false
       }))
     })
-
-    // this.props.dispatch(handleReceiveCommentsForPost(this.props.postId))
   }
 
   /**
@@ -78,14 +76,14 @@ class PostDetailView extends Component {
     }))
 
     _updateComment(commentId, +Date.now(), body).catch(_ => {
-      alert(
-        'An error occurred during updating the comment. Please refresh the page.'
-      )
       // if failed -> reset our state
       this.setState({
         ...resetState,
         isCommentFormVisible: false
       })
+      alert(
+        'An error occurred during updating the comment. Please refresh the page.'
+      )
     })
   }
 
@@ -103,11 +101,11 @@ class PostDetailView extends Component {
     }))
 
     _deleteComment(commentId).catch(_ => {
+      // if failed -> reset our state
+      this.setState(resetState)
       alert(
         'An error occurred during deleting the comment. Please refresh the page.'
       )
-      // if failed -> reset our state
-      this.setState(resetState)
     })
   }
 
@@ -132,9 +130,9 @@ class PostDetailView extends Component {
     }))
 
     _voteOnComment(commentId, thumbsUp).catch(_ => {
-      alert('An error occurred during voting. Please refresh the page.')
       // if failed -> reset our state
       this.setState(resetState)
+      alert('An error occurred during voting. Please refresh the page.')
     })
   }
 
