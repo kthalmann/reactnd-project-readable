@@ -13,7 +13,7 @@ class PostCreateEditView extends Component {
     return (
       <div>
         <h1>{isNewPost ? 'New' : 'Edit'} Post</h1>
-        <PostForm post={post} category={params.get('category')} />
+        <PostForm post={post} category={params.get('category') || ''} />
       </div>
     )
   }
