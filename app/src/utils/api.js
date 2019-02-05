@@ -49,6 +49,14 @@ export const _deletePost = postId => {
   }).then(res => res.json())
 }
 
+export const _updatePost = (postId, title, body) => {
+  return fetch(`${api}/posts/${postId}`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ title, body })
+  }).then(res => res.json())
+}
+
 export const _voteOnComment = (commentId, isUpvote) => {
   return fetch(`${api}/comments/${commentId}`, {
     method: 'POST',

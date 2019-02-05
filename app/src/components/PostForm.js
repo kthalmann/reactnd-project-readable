@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { generateUID } from '../utils/index'
-import { handleAddPost } from '../actions/posts'
+import { handleAddPost, handleUpdatePost } from '../actions/posts'
 import { withRouter } from 'react-router-dom'
 
 class PostForm extends Component {
@@ -57,6 +57,14 @@ class PostForm extends Component {
   handleSubmit = e => {
     e.preventDefault()
 
+    if (this.props.post) {
+      this.updatePost()
+    } else {
+      this.addNewPost()
+    }
+  }
+
+  addNewPost = _ => {
     const { titleInput, bodyInput, authorInput, categoryInput } = this.state
 
     // build new post object
@@ -69,18 +77,32 @@ class PostForm extends Component {
       category: categoryInput
     }
 
-    this.props.dispatch(handleAddPost(newPost, this.redirect))
+    this.props.dispatch(handleAddPost(newPost, this.successCallback))
+  }
 
-    // reset input fields
-    this.setState(this.initialState)
+  updatePost = _ => {
+    const { titleInput, bodyInput } = this.state
+
+    this.props.dispatch(
+      handleUpdatePost(
+        this.props.post.id,
+        titleInput,
+        bodyInput,
+        this.successCallback
+      )
+    )
   }
 
   /**
-   * Navigate to post detail view
+   * Called after successfully added or edited post
    *
    * @param postId
    */
-  redirect = postId => {
+  successCallback = postId => {
+    // reset input fields
+    this.setState(this.initialState)
+
+    // redirect to detail view
     this.props.history.push(`/post/${postId}`)
   }
 

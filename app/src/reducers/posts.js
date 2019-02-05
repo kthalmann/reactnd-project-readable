@@ -3,7 +3,8 @@ import {
   UPVOTE_POST,
   DOWNVOTE_POST,
   ADD_POST,
-  DELETE_POST
+  DELETE_POST,
+  UPDATE_POST
 } from '../actions/posts'
 import { removeProperty } from '../utils/index'
 
@@ -23,6 +24,15 @@ export function posts(state = null, action) {
       return {
         ...state,
         [post.id]: post
+      }
+    case UPDATE_POST:
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          title: action.title,
+          body: action.body
+        }
       }
     case DELETE_POST:
       return removeProperty(state, action.id)
