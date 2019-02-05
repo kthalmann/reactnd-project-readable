@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-// import { handleReceiveCommentsForPost } from '../actions/comments'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import {
   _getCommentsForPost,
@@ -13,6 +12,7 @@ import ShowPost from './ShowPost'
 import CommentForm from './CommentForm'
 import { generateUID } from '../utils/index'
 import { decreaseCommentCount, increaseCommentCount } from '../actions/posts'
+import Page404 from './404'
 
 class PostDetailView extends Component {
   state = {
@@ -171,8 +171,13 @@ class PostDetailView extends Component {
   }
 
   render() {
+    // No post => 404
+    if (!this.props.post) {
+      return <Page404 />
+    }
+
     return (
-      <div>
+      <Fragment>
         <ShowPost
           postId={this.props.postId}
           onAddComment={this.handleAddComment}
@@ -195,13 +200,14 @@ class PostDetailView extends Component {
             onUpdate={this.handleUpdateComment}
           />
         )}
-      </div>
+      </Fragment>
     )
   }
 }
 
-function mapStateToProps({}, props) {
+function mapStateToProps({ posts }, props) {
   return {
+    post: posts[props.match.params.id],
     postId: props.match.params.id
   }
 }

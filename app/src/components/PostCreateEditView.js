@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostForm from './PostForm'
+import Page404 from './404'
 
 class PostCreateEditView extends Component {
   render() {
     const { post, location } = this.props
+
+    // No post => 404
+    if (!post) {
+      return <Page404 />
+    }
 
     let params = new URLSearchParams(location.search)
 
