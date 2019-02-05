@@ -12,6 +12,7 @@ import CommentListing from './CommentListing'
 import ShowPost from './ShowPost'
 import CommentForm from './CommentForm'
 import { generateUID } from '../utils/index'
+import { decreaseCommentCount, increaseCommentCount } from '../actions/posts'
 
 class PostDetailView extends Component {
   state = {
@@ -44,13 +45,21 @@ class PostDetailView extends Component {
       parentId: this.props.postId
     }
 
-    _addComment(newComment).then(newComment => {
-      // add new comment returned from server to state
-      this.setState(previousState => ({
-        comments: previousState.comments.concat(newComment),
-        isCommentFormVisible: false
-      }))
-    })
+    _addComment(newComment)
+      .then(newComment => {
+        // add new comment returned from server to state
+        this.setState(previousState => ({
+          comments: previousState.comments.concat(newComment),
+          isCommentFormVisible: false
+        }))
+
+        this.props.dispatch(increaseCommentCount(this.props.postId))
+      })
+      .catch(_ =>
+        alert(
+          'An error occurred during creating the comment. Please refresh the page.'
+        )
+      )
   }
 
   /**
@@ -100,13 +109,15 @@ class PostDetailView extends Component {
       )
     }))
 
-    _deleteComment(commentId).catch(_ => {
-      // if failed -> reset our state
-      this.setState(resetState)
-      alert(
-        'An error occurred during deleting the comment. Please refresh the page.'
-      )
-    })
+    _deleteComment(commentId)
+      .then(_ => this.props.dispatch(decreaseCommentCount(this.props.postId)))
+      .catch(_ => {
+        // if failed -> reset our state
+        this.setState(resetState)
+        alert(
+          'An error occurred during deleting the comment. Please refresh the page.'
+        )
+      })
   }
 
   /**

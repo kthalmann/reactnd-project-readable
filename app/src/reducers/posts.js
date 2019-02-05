@@ -4,7 +4,9 @@ import {
   DOWNVOTE_POST,
   ADD_POST,
   DELETE_POST,
-  UPDATE_POST
+  UPDATE_POST,
+  INCREASE_COMMENT_COUNT,
+  DECREASE_COMMENT_COUNT
 } from '../actions/posts'
 import { removeProperty } from '../utils/index'
 
@@ -50,6 +52,22 @@ export function posts(state = null, action) {
         [action.id]: {
           ...state[action.id],
           voteScore: state[action.id].voteScore - 1
+        }
+      }
+    case INCREASE_COMMENT_COUNT:
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          commentCount: state[action.id].commentCount + 1
+        }
+      }
+    case DECREASE_COMMENT_COUNT:
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          commentCount: state[action.id].commentCount - 1
         }
       }
     default:
