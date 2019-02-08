@@ -1,31 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import PostListing from './PostListing'
 import { Link } from 'react-router-dom'
 import { capitalize } from '../utils'
 
-class PostListingView extends Component {
-  render() {
-    const { posts, category } = this.props
-
-    return (
-      <div className="post-listing-view">
-        <div className="row flex-center">
-          <Link
-            to={{
-              pathname: '/post/new',
-              search: category ? `?category=${category}` : null
-            }}
-            className="paper-btn btn-primary"
-          >
-            New Post {category && `in «${capitalize(category)}»`}
-          </Link>
-        </div>
-        <hr />
-        <PostListing posts={posts} category={category} />
+function PostListingView({ posts, category }) {
+  return (
+    <div className="post-listing-view">
+      <div className="row flex-center">
+        <Link
+          to={{
+            pathname: '/post/new',
+            search: category ? `?category=${category}` : null
+          }}
+          className="paper-btn btn-primary"
+        >
+          New Post {category && `in «${capitalize(category)}»`}
+        </Link>
       </div>
-    )
-  }
+      <hr />
+      <PostListing posts={posts} category={category} />
+    </div>
+  )
 }
 
 function mapStateToProps({ posts }, props) {

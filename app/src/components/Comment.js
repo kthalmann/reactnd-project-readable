@@ -1,35 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { FormattedRelative } from 'react-intl'
 import CommentActions from './CommentActions'
 
-class Comment extends Component {
-  render() {
-    const { id, timestamp, author, body, voteScore } = this.props.comment
-    const { onVote, onEdit, onDelete } = this.props
-
-    return (
-      <div className="comment card shadow shadow-small">
-        <div className="card-body">
-          <div className="comment__meta card-subtitle">
-            <span className="comment__author text-secondary">#{author}</span>
-            <span className="comment__date text-muted">
-              <FormattedRelative value={timestamp} />
-            </span>
-          </div>
-          <div className="comment__body">{body}</div>
+function Comment({ comment, onVote, onEdit, onDelete }) {
+  return (
+    <div className="comment card shadow shadow-small">
+      <div className="card-body">
+        <div className="comment__meta card-subtitle">
+          <span className="comment__author text-secondary">
+            #{comment.author}
+          </span>
+          <span className="comment__date text-muted">
+            <FormattedRelative value={comment.timestamp} />
+          </span>
         </div>
-        <div className="card-footer">
-          <CommentActions
-            commentId={id}
-            voteScore={voteScore}
-            onVote={onVote}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        </div>
+        <div className="comment__body">{comment.body}</div>
       </div>
-    )
-  }
+      <div className="card-footer">
+        <CommentActions
+          commentId={comment.id}
+          voteScore={comment.voteScore}
+          onVote={onVote}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      </div>
+    </div>
+  )
 }
 
 export default Comment
