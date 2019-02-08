@@ -22,9 +22,12 @@ class PostListing extends Component {
         <div className="post-listing__header row flex-edges flex-middle">
           <h2 className="post-listing__title">Posts</h2>
           <div className="post-listing__sorting form-group">
-            <label htmlFor="sortMethod">Sort by:</label>
+            <label className="post-listing__sort-label" htmlFor="sortMethod">
+              Sort by:
+            </label>
             <select
               id="sortMethod"
+              className="post-listing__sort-input"
               value={postSorting || DEFAULT_POST_SORT_METHOD}
               onChange={e => this.onChange(e.target.value)}
             >

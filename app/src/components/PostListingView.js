@@ -10,14 +10,13 @@ class PostListingView extends Component {
 
     return (
       <div className="post-listing-view">
-        <hr />
         <div className="row flex-center">
           <Link
             to={{
               pathname: '/post/new',
               search: category ? `?category=${category}` : null
             }}
-            className="paper-btn"
+            className="paper-btn btn-primary"
           >
             New Post {category && `in «${capitalize(category)}»`}
           </Link>

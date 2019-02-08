@@ -18,8 +18,8 @@ class ShowPost extends Component {
 
     return (
       <article className="post article">
-        <h1 className="article-title">{title}</h1>
-        <p className="article-meta">
+        <h1 className="post__title article-title">{title}</h1>
+        <p className="post__meta article-meta">
           Written by <span className="text-secondary">#{author}</span> on{' '}
           <FormattedDate
             value={timestamp}
@@ -28,7 +28,7 @@ class ShowPost extends Component {
             year="numeric"
           />
         </p>
-        <p>{body}</p>
+        <p className="post__body">{body}</p>
         <div className="row">
           <button onClick={() => this.props.onAddComment()}>Add comment</button>
         </div>
