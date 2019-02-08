@@ -1,36 +1,37 @@
 body {
-  padding: 2em;
+    /*padding: 2em;*/
 }
 
 a {
-  background: none;
+    color: inherit;
+    background: none;
 }
 
 h2 {
-  margin: 0;
+    margin: 0;
 }
 
 h3 {
-  text-align: center;
+    text-align: center;
 }
 
 hr {
-  margin: 50px 0;
+    margin: 50px 0;
 }
 
 .container {
-  max-width: 800px;
-  padding-top: 5em;
+    max-width: 800px;
+    padding-top: 5em;
 }
 
 .modal {
-  opacity: 1;
-  visibility: visible;
+    opacity: 1;
+    visibility: visible;
     z-index: 1000;
 }
 
 .modal .modal-body {
-  top: 50%;
+    top: 50%;
 }
 
 .modal button {
@@ -38,32 +39,37 @@ hr {
 }
 
 label {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 /* Category Navigation */
 .category-nav.fixed {
-  left: 1em;
-  top: 1em;
-  right: 1em;
-  width: auto;
+    left: 1em;
+    top: 1em;
+    right: 1em;
+    width: auto;
 }
 
 .category-nav__link.active {
     font-weight: bold;
 }
 
+/* Post Listing View */
+.post-listing-view {
+    margin-top: 4em;
+}
+
 /* Post Listing */
 .post-listing__header {
-  border-bottom: 1px solid;
+    border-bottom: 1px solid;
 }
 
 .post-listing__sorting {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .post-listing__sort-input {
-  display: inline-block;
+    display: inline-block;
 }
 
 /* Post Teaser */
@@ -78,12 +84,12 @@ label {
 
 /* Post Actions */
 .post-actions__delete, .post-actions__edit {
-  float: right;
+    float: right;
 }
 
 .post-actions .btn-link {
-  padding-top: 0;
-  padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .post-actions__edit {
@@ -92,90 +98,90 @@ label {
 }
 
 .btn-link, .btn-link:hover, .btn-link:active, .btn-link:focus {
-  border: none;
-  box-shadow: none;
-  background: none;
-  padding-left: .5rem;
-  padding-right: .5rem;
-  transform: none;
+    border: none;
+    box-shadow: none;
+    background: none;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    transform: none;
 }
 
 .btn-link:hover, .btn-link:focus {
-  color: #ef8425;
+    color: #ef8425;
 }
 
 /* Comments */
 .comment {
-  margin-bottom: 30px;
-  overflow: hidden;
+    margin-bottom: 30px;
+    overflow: hidden;
 }
 
 .comment__author {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .comment__date {
-  font-size: 0.9em;
+    font-size: 0.9em;
 }
 
 .comment__body {
-  font-size: 1.1em;
-  line-height: 1.3em;
+    font-size: 1.1em;
+    line-height: 1.3em;
 }
 
 /* Comment Actions */
 .comment-actions__delete, .comment-actions__edit {
-  float: right;
+    float: right;
 }
 
 .comment-actions .btn-link {
-  padding-top: 0;
-  padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 /* Post */
 .post {
-  margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .post__body {
-  font-size: 1.2em;
+    font-size: 1.2em;
 }
 
 .post .post-actions {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }
 
 .post .post-actions .btn-link {
-  margin-left: 0;
-  font-size: 1.3rem;
+    margin-left: 0;
+    font-size: 1.3rem;
 }
 
 .comment-input {
-  width: 500px;
+    width: 500px;
 }
 
 /* Post Form */
 .post-form {
-  padding: 40px;
+    padding: 40px;
     background-color: #f1f1f1;
 }
 
 .post-form label {
-  display: block;
+    display: block;
 }
 
 .post-form__input {
-  width: 100%;
+    width: 100%;
 }
 
 .post-form__button {
-  width: 150px;
-  float: right;
-  margin-left: 20px;
+    width: 150px;
+    float: right;
+    margin-left: 20px;
 }
 
 /* Page 404 */
 .page404 {
-  text-align: center;
+    text-align: center;
 }

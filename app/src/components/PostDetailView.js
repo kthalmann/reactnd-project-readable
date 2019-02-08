@@ -23,6 +23,7 @@ class PostDetailView extends Component {
   }
 
   componentDidMount() {
+    // load comments for the post
     _getCommentsForPost(this.props.postId).then(comments => {
       this.setState(previousState => ({
         comments,
@@ -149,14 +150,12 @@ class PostDetailView extends Component {
 
   handleAddComment = () => {
     this.setState(previousState => ({
-      ...previousState,
       isCommentFormVisible: true
     }))
   }
 
   handleEditComment = commentId => {
     this.setState(previousState => ({
-      ...previousState,
       isCommentFormVisible: true,
       commentEditing: commentId
     }))
@@ -164,7 +163,6 @@ class PostDetailView extends Component {
 
   handleCloseCommentForm = () => {
     this.setState(previousState => ({
-      ...previousState,
       isCommentFormVisible: false,
       commentEditing: null
     }))
