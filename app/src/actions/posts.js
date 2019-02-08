@@ -73,9 +73,8 @@ export function handleAddPost(post, cb) {
       .then(res => {
         dispatch(addPost(res))
       })
-      .then(() => cb(post.id))
+      .then(() => cb(post.id, post.category))
       .catch(e => {
-        // dispatch(deletePost(post.id))
         alert(
           'An error occurred during creating post. Please refresh the page.'
         )
@@ -125,8 +124,11 @@ export function handleUpdatePost(postId, title, body, cb) {
     _updatePost(postId, title, body)
       .then(res => {
         dispatch(updatePost(postId, title, body))
+        return res
       })
-      .then(() => cb(postId))
+      .then(post => {
+        cb(postId, post.category)
+      })
       .catch(e => {
         alert(
           'An error occurred during creating post. Please refresh the page.'

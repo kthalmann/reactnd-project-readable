@@ -97,13 +97,14 @@ class PostForm extends Component {
    * Called after successfully added or edited post
    *
    * @param postId
+   * @param category
    */
-  successCallback = postId => {
+  successCallback = (postId, category) => {
     // reset input fields
     this.setState(this.initialState)
 
     // redirect to detail view
-    this.props.history.push(`/post/${postId}`)
+    this.props.history.push(`/${category}/${postId}`)
   }
 
   /**
