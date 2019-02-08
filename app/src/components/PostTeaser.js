@@ -1,8 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import PostActions from './PostActions'
-import { Link, withRouter } from 'react-router-dom'
-import { FormattedDate } from 'react-intl'
+import React from 'react';
+import { connect } from 'react-redux';
+import PostActions from './PostActions';
+import { Link, withRouter } from 'react-router-dom';
+import { FormattedDate } from 'react-intl';
 
 function PostTeaser({
   post: { id, title, author, timestamp, voteScore, commentCount, category }
@@ -29,13 +29,13 @@ function PostTeaser({
         />
       </div>
     </div>
-  )
+  );
 }
 
 function mapStateToProps({ posts }, { postId }) {
   return {
     post: posts[postId]
-  }
+  };
 }
 
-export default withRouter(connect(mapStateToProps)(PostTeaser))
+export default withRouter(connect(mapStateToProps)(PostTeaser));

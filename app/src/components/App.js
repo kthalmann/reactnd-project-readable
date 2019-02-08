@@ -1,16 +1,16 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { handleInitialData } from '../actions/shared'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import LoadingBar from 'react-redux-loading'
-import PostListingView from './PostListingView'
-import PostDetailView from './PostDetailView'
-import PostCreateEditView from './PostCreateEditView'
-import CategoryNavigation from './CategoryNavigation'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { handleInitialData } from '../actions/shared';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import LoadingBar from 'react-redux-loading';
+import PostListingView from './PostListingView';
+import PostDetailView from './PostDetailView';
+import PostCreateEditView from './PostCreateEditView';
+import CategoryNavigation from './CategoryNavigation';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
+    this.props.dispatch(handleInitialData());
   }
 
   render() {
@@ -34,14 +34,14 @@ class App extends Component {
           </div>
         </Fragment>
       </Router>
-    )
+    );
   }
 }
 
 function mapStateToProps({ posts }) {
   return {
     loading: !posts
-  }
+  };
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);

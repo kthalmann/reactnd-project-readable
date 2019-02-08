@@ -1,21 +1,21 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { DEFAULT_POST_SORT_METHOD } from '../actions/shared'
-import { setPostSortMethod } from '../actions/postSorting'
-import PostTeaser from './PostTeaser'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { DEFAULT_POST_SORT_METHOD } from '../actions/shared';
+import { setPostSortMethod } from '../actions/postSorting';
+import PostTeaser from './PostTeaser';
 
 class PostListing extends Component {
   onChange = newSorting => {
-    this.props.dispatch(setPostSortMethod(newSorting))
-  }
+    this.props.dispatch(setPostSortMethod(newSorting));
+  };
 
   render() {
-    const { posts, postSorting } = this.props
+    const { posts, postSorting } = this.props;
 
     // sort posts by sort method and return only ids
     const postIds = posts
       .sort((a, b) => b[postSorting] - a[postSorting])
-      .map(post => post.id)
+      .map(post => post.id);
 
     return (
       <div className="post-listing">
@@ -41,7 +41,7 @@ class PostListing extends Component {
         )}
         {postIds.map(post => <PostTeaser key={post} postId={post} />)}
       </div>
-    )
+    );
   }
 }
 
@@ -49,7 +49,7 @@ function mapStateToProps({ postSorting }, { posts }) {
   return {
     posts,
     postSorting
-  }
+  };
 }
 
-export default connect(mapStateToProps)(PostListing)
+export default connect(mapStateToProps)(PostListing);

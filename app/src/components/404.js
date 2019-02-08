@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Page404(props) {
   return (
@@ -9,5 +9,5 @@ export default function Page404(props) {
         Back to Start
       </Link>
     </div>
-  )
+  );
 }

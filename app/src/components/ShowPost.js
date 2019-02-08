@@ -1,7 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import PostActions from './PostActions'
-import { FormattedDate } from 'react-intl'
+import React from 'react';
+import { connect } from 'react-redux';
+import PostActions from './PostActions';
+import { FormattedDate } from 'react-intl';
 
 function ShowPost({
   post: {
@@ -38,14 +38,14 @@ function ShowPost({
         commentCount={commentCount}
       />
     </article>
-  )
+  );
 }
 
 function mapStateToProps({ posts }, props) {
   return {
     post: posts[props.postId],
     onAddComment: props.onAddComment
-  }
+  };
 }
 
-export default connect(mapStateToProps)(ShowPost)
+export default connect(mapStateToProps)(ShowPost);

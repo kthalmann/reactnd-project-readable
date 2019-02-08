@@ -1,6 +1,6 @@
-import React from 'react'
-import { FormattedRelative } from 'react-intl'
-import CommentActions from './CommentActions'
+import React from 'react';
+import { FormattedRelative } from 'react-intl';
+import CommentActions from './CommentActions';
 
 function Comment({ comment, onVote, onEdit, onDelete }) {
   return (
@@ -26,7 +26,7 @@ function Comment({ comment, onVote, onEdit, onDelete }) {
         />
       </div>
     </div>
-  )
+  );
 }
 
-export default Comment
+export default Comment;

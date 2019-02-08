@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { generateUID } from '../utils/index'
-import { handleAddPost, handleUpdatePost } from '../actions/posts'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { generateUID } from '../utils/index';
+import { handleAddPost, handleUpdatePost } from '../actions/posts';
+import { withRouter } from 'react-router-dom';
 
 class PostForm extends Component {
   initialState = {
@@ -10,29 +10,29 @@ class PostForm extends Component {
     titleInput: '',
     categoryInput: '',
     bodyInput: ''
-  }
+  };
 
   constructor(props) {
-    super(props)
+    super(props);
 
     // get category from query parameter
     const category = props.categories.find(
       category => category.name === props.category
-    )
+    );
 
     this.state = {
       ...this.initialState,
       categoryInput: category ? category.name : ''
-    }
+    };
 
-    if (!this.props.post) return
+    if (!this.props.post) return;
 
     this.state = {
       authorInput: this.props.post.author,
       titleInput: this.props.post.title,
       categoryInput: this.props.post.category,
       bodyInput: this.props.post.body
-    }
+    };
   }
 
   /**
@@ -41,13 +41,13 @@ class PostForm extends Component {
    * @param e
    */
   handleChange = e => {
-    const field = e.target.name
-    const value = e.target.value
+    const field = e.target.name;
+    const value = e.target.value;
 
     this.setState({
       [field]: value
-    })
-  }
+    });
+  };
 
   /**
    * Handle submission of form
@@ -55,17 +55,17 @@ class PostForm extends Component {
    * @param e
    */
   handleSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (this.props.post) {
-      this.updatePost()
+      this.updatePost();
     } else {
-      this.addNewPost()
+      this.addNewPost();
     }
-  }
+  };
 
   addNewPost = _ => {
-    const { titleInput, bodyInput, authorInput, categoryInput } = this.state
+    const { titleInput, bodyInput, authorInput, categoryInput } = this.state;
 
     // build new post object
     const newPost = {
@@ -75,13 +75,13 @@ class PostForm extends Component {
       body: bodyInput,
       author: authorInput,
       category: categoryInput
-    }
+    };
 
-    this.props.dispatch(handleAddPost(newPost, this.successCallback))
-  }
+    this.props.dispatch(handleAddPost(newPost, this.successCallback));
+  };
 
   updatePost = _ => {
-    const { titleInput, bodyInput } = this.state
+    const { titleInput, bodyInput } = this.state;
 
     this.props.dispatch(
       handleUpdatePost(
@@ -90,8 +90,8 @@ class PostForm extends Component {
         bodyInput,
         this.successCallback
       )
-    )
-  }
+    );
+  };
 
   /**
    * Called after successfully added or edited post
@@ -101,11 +101,11 @@ class PostForm extends Component {
    */
   successCallback = (postId, category) => {
     // reset input fields
-    this.setState(this.initialState)
+    this.setState(this.initialState);
 
     // redirect to detail view
-    this.props.history.push(`/${category}/${postId}`)
-  }
+    this.props.history.push(`/${category}/${postId}`);
+  };
 
   /**
    * Check if form is allowed to submit
@@ -113,15 +113,15 @@ class PostForm extends Component {
    * @returns boolean
    */
   isSubmitable = _ => {
-    const { authorInput, titleInput, categoryInput, bodyInput } = this.state
+    const { authorInput, titleInput, categoryInput, bodyInput } = this.state;
 
-    return authorInput && titleInput && categoryInput && bodyInput
-  }
+    return authorInput && titleInput && categoryInput && bodyInput;
+  };
 
   render() {
-    const { post, category } = this.props
-    const { authorInput, titleInput, categoryInput, bodyInput } = this.state
-    const isNewPost = !post
+    const { post, category } = this.props;
+    const { authorInput, titleInput, categoryInput, bodyInput } = this.state;
+    const isNewPost = !post;
 
     return (
       <div>
@@ -219,7 +219,7 @@ class PostForm extends Component {
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
@@ -228,7 +228,7 @@ function mapStateToProps({ categories }) {
     categories: Object.keys(categories).map(
       categoryId => categories[categoryId]
     )
-  }
+  };
 }
 
-export default withRouter(connect(mapStateToProps)(PostForm))
+export default withRouter(connect(mapStateToProps)(PostForm));

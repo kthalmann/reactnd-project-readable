@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class CommentForm extends Component {
   handleCreate = _ => {
-    this.props.onCreate(this.authorInput.value, this.bodyTextInput.value)
-  }
+    this.props.onCreate(this.authorInput.value, this.bodyTextInput.value);
+  };
   handleUpdate = _ => {
-    this.props.onUpdate(this.props.comment.id, this.bodyTextInput.value)
-  }
+    this.props.onUpdate(this.props.comment.id, this.bodyTextInput.value);
+  };
 
   render() {
-    const { comment, onClose } = this.props
-    const isNewComment = !comment
+    const { comment, onClose } = this.props;
+    const isNewComment = !comment;
 
     return (
       <div className="modal">
@@ -48,8 +48,8 @@ class CommentForm extends Component {
           )}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default CommentForm
+export default CommentForm;

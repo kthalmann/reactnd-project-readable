@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 import {
   FiHeart,
   FiArrowUp,
   FiArrowDown,
   FiEdit,
   FiTrash2
-} from 'react-icons/fi'
+} from 'react-icons/fi';
 
 function CommentActions({ commentId, voteScore, onVote, onEdit, onDelete }) {
   return (
@@ -43,7 +43,7 @@ function CommentActions({ commentId, voteScore, onVote, onEdit, onDelete }) {
         <FiEdit />
       </button>
     </div>
-  )
+  );
 }
 
-export default CommentActions
+export default CommentActions;

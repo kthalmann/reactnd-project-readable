@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { NavLink, Link, withRouter } from 'react-router-dom'
-import { capitalize } from '../utils'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink, Link, withRouter } from 'react-router-dom';
+import { capitalize } from '../utils';
 
 class CategoryNavigation extends Component {
   render() {
@@ -38,7 +38,7 @@ class CategoryNavigation extends Component {
           </div>
         </div>
       </nav>
-    )
+    );
   }
 }
 
@@ -47,7 +47,7 @@ function mapStateToProps({ categories }) {
     categories: Object.keys(categories).map(
       categoryId => categories[categoryId]
     )
-  }
+  };
 }
 
-export default withRouter(connect(mapStateToProps)(CategoryNavigation))
+export default withRouter(connect(mapStateToProps)(CategoryNavigation));

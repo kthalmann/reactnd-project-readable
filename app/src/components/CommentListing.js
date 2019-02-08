@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import Comment from './Comment'
+import React, { Fragment } from 'react';
+import Comment from './Comment';
 
 function CommentListing({ comments, loading, onVote, onEdit, onDelete }) {
   return (
@@ -20,7 +20,7 @@ function CommentListing({ comments, loading, onVote, onEdit, onDelete }) {
           ))}
       </div>
     </Fragment>
-  )
+  );
 }
 
-export default CommentListing
+export default CommentListing;

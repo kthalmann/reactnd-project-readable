@@ -1,18 +1,18 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import {
   _getCommentsForPost,
   _voteOnComment,
   _addComment,
   _deleteComment,
   _updateComment
-} from '../utils/api'
-import CommentListing from './CommentListing'
-import ShowPost from './ShowPost'
-import CommentForm from './CommentForm'
-import { generateUID } from '../utils/index'
-import { decreaseCommentCount, increaseCommentCount } from '../actions/posts'
-import Page404 from './404'
+} from '../utils/api';
+import CommentListing from './CommentListing';
+import ShowPost from './ShowPost';
+import CommentForm from './CommentForm';
+import { generateUID } from '../utils/index';
+import { decreaseCommentCount, increaseCommentCount } from '../actions/posts';
+import Page404 from './404';
 
 class PostDetailView extends Component {
   state = {
@@ -20,7 +20,7 @@ class PostDetailView extends Component {
     isCommentFormVisible: false,
     commentEditing: null,
     comments: []
-  }
+  };
 
   componentDidMount() {
     // load comments for the post
@@ -28,8 +28,8 @@ class PostDetailView extends Component {
       this.setState(previousState => ({
         comments,
         isLoading: false
-      }))
-    })
+      }));
+    });
   }
 
   /**
@@ -44,7 +44,7 @@ class PostDetailView extends Component {
       body,
       author,
       parentId: this.props.postId
-    }
+    };
 
     _addComment(newComment)
       .then(newComment => {
@@ -52,16 +52,16 @@ class PostDetailView extends Component {
         this.setState(previousState => ({
           comments: previousState.comments.concat(newComment),
           isCommentFormVisible: false
-        }))
+        }));
 
-        this.props.dispatch(increaseCommentCount(this.props.postId))
+        this.props.dispatch(increaseCommentCount(this.props.postId));
       })
       .catch(_ =>
         alert(
           'An error occurred during creating the comment. Please refresh the page.'
         )
-      )
-  }
+      );
+  };
 
   /**
    *
@@ -70,56 +70,56 @@ class PostDetailView extends Component {
    */
   handleUpdateComment = (commentId, body) => {
     // make copy of current state in case api call goes bad
-    const resetState = JSON.parse(JSON.stringify(this.state))
+    const resetState = JSON.parse(JSON.stringify(this.state));
 
     this.setState(previousState => ({
       isCommentFormVisible: false,
       commentEditing: null,
       comments: previousState.comments.map(comment => {
         if (comment.id === commentId) {
-          comment.body = body
-          comment.timestamp = +Date.now()
+          comment.body = body;
+          comment.timestamp = +Date.now();
         }
 
-        return comment
+        return comment;
       })
-    }))
+    }));
 
     _updateComment(commentId, +Date.now(), body).catch(_ => {
       // if failed -> reset our state
       this.setState({
         ...resetState,
         isCommentFormVisible: false
-      })
+      });
       alert(
         'An error occurred during updating the comment. Please refresh the page.'
-      )
-    })
-  }
+      );
+    });
+  };
 
   /**
    * @param commentId
    */
   handleDeleteComment = commentId => {
     // make copy of current state in case api call goes bad
-    const resetState = JSON.parse(JSON.stringify(this.state))
+    const resetState = JSON.parse(JSON.stringify(this.state));
 
     this.setState(previousState => ({
       comments: previousState.comments.filter(
         comment => comment.id !== commentId
       )
-    }))
+    }));
 
     _deleteComment(commentId)
       .then(_ => this.props.dispatch(decreaseCommentCount(this.props.postId)))
       .catch(_ => {
         // if failed -> reset our state
-        this.setState(resetState)
+        this.setState(resetState);
         alert(
           'An error occurred during deleting the comment. Please refresh the page.'
-        )
-      })
-  }
+        );
+      });
+  };
 
   /**
    * @param commentId
@@ -127,51 +127,51 @@ class PostDetailView extends Component {
    */
   handleVoteOnComment = (commentId, thumbsUp) => {
     // make copy of current state in case api call goes bad
-    const resetState = JSON.parse(JSON.stringify(this.state))
+    const resetState = JSON.parse(JSON.stringify(this.state));
 
     this.setState(previousState => ({
       comments: previousState.comments.map(comment => {
         if (comment.id === commentId) {
           comment.voteScore = thumbsUp
             ? comment.voteScore + 1
-            : comment.voteScore - 1
+            : comment.voteScore - 1;
         }
 
-        return comment
+        return comment;
       })
-    }))
+    }));
 
     _voteOnComment(commentId, thumbsUp).catch(_ => {
       // if failed -> reset our state
-      this.setState(resetState)
-      alert('An error occurred during voting. Please refresh the page.')
-    })
-  }
+      this.setState(resetState);
+      alert('An error occurred during voting. Please refresh the page.');
+    });
+  };
 
   handleAddComment = () => {
     this.setState(previousState => ({
       isCommentFormVisible: true
-    }))
-  }
+    }));
+  };
 
   handleEditComment = commentId => {
     this.setState(previousState => ({
       isCommentFormVisible: true,
       commentEditing: commentId
-    }))
-  }
+    }));
+  };
 
   handleCloseCommentForm = () => {
     this.setState(previousState => ({
       isCommentFormVisible: false,
       commentEditing: null
-    }))
-  }
+    }));
+  };
 
   render() {
     // No post => 404
     if (!this.props.post) {
-      return <Page404 />
+      return <Page404 />;
     }
 
     return (
@@ -199,7 +199,7 @@ class PostDetailView extends Component {
           />
         )}
       </Fragment>
-    )
+    );
   }
 }
 
@@ -207,7 +207,7 @@ function mapStateToProps({ posts }, props) {
   return {
     post: posts[props.match.params.postId],
     postId: props.match.params.postId
-  }
+  };
 }
 
-export default connect(mapStateToProps)(PostDetailView)
+export default connect(mapStateToProps)(PostDetailView);

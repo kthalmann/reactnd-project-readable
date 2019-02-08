@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import {
   FiHeart,
   FiArrowUp,
@@ -8,37 +8,37 @@ import {
   FiMessageCircle,
   FiEdit,
   FiTrash2
-} from 'react-icons/fi'
+} from 'react-icons/fi';
 import {
   handleUpvotePost,
   handleDownvotePost,
   handleDeletePost
-} from '../actions/posts'
+} from '../actions/posts';
 
 class PostActions extends Component {
   onUpvote = _ => {
-    this.props.dispatch(handleUpvotePost(this.props.postId))
-  }
+    this.props.dispatch(handleUpvotePost(this.props.postId));
+  };
   onDownvote = _ => {
-    this.props.dispatch(handleDownvotePost(this.props.postId))
-  }
+    this.props.dispatch(handleDownvotePost(this.props.postId));
+  };
   onDelete = _ => {
     this.props.dispatch(
       handleDeletePost(this.props.postId, this.onDeleteCallbackHandler)
-    )
-  }
+    );
+  };
 
   /**
    * if detail page is showing -> go to home
    */
   onDeleteCallbackHandler = _ => {
-    const { postId, postCategory, location, history } = this.props
+    const { postId, postCategory, location, history } = this.props;
 
-    if (location.pathname === `/${postCategory}/${postId}`) history.push('/')
-  }
+    if (location.pathname === `/${postCategory}/${postId}`) history.push('/');
+  };
 
   render() {
-    const { postId, voteScore, commentCount } = this.props
+    const { postId, voteScore, commentCount } = this.props;
 
     return (
       <div className="post-actions">
@@ -80,8 +80,8 @@ class PostActions extends Component {
           <FiEdit />
         </Link>
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(connect()(PostActions))
+export default withRouter(connect()(PostActions));
