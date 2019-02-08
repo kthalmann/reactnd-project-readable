@@ -207,8 +207,8 @@ class PostDetailView extends Component {
 
 function mapStateToProps({ posts }, props) {
   return {
-    post: posts[props.match.params.id],
-    postId: props.match.params.id
+    post: posts[props.match.params.postId],
+    postId: props.match.params.postId
   }
 }
 

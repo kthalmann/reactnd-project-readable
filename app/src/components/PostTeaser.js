@@ -12,11 +12,12 @@ class PostTeaser extends Component {
       author,
       timestamp,
       voteScore,
-      commentCount
+      commentCount,
+      category
     } = this.props.post
     return (
       <div className="post-teaser card">
-        <Link to={`/post/${id}`} className="card-body">
+        <Link to={`/${category}/${id}`} className="card-body">
           <h4 className="post-teaser__title card-title">{title}</h4>
           <p className="post-teaser__author">
             <span className="text-secondary">#{author}</span> on{' '}

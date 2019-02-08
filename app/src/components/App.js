@@ -23,7 +23,7 @@ class App extends Component {
                 <Route path="/" exact component={PostListingView} />
                 <Route path="/post/new" component={PostCreateEditView} />
                 <Route path="/post/:id/edit" component={PostCreateEditView} />
-                <Route path="/post/:id" component={PostDetailView} />
+                <Route path="/:category/:postId" component={PostDetailView} />
                 <Route path="/:category" component={PostListingView} />
               </Switch>
             </div>
