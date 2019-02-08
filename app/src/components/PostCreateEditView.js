@@ -7,8 +7,8 @@ class PostCreateEditView extends Component {
   render() {
     const { post, location } = this.props
 
-    // No post => 404
-    if (!post) {
+    // Requested post not found => 404
+    if (post === undefined) {
       return <Page404 />
     }
 
@@ -29,7 +29,7 @@ function mapStateToProps({ posts }, props) {
   const postId = props.match.params.id || null
 
   return {
-    post: postId ? posts[postId] : null
+    post: postId ? posts[postId] : null // if postId doesn't match any existing posts the post variable will be "undefined"
   }
 }
 
