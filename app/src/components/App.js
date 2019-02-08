@@ -21,10 +21,8 @@ class App extends Component {
               <CategoryNavigation />
               <Switch>
                 <Route path="/" exact component={PostListingView} />
-                <Route
-                  path={['/post/new', '/post/:id/edit']}
-                  component={PostCreateEditView}
-                />
+                <Route path="/post/new" component={PostCreateEditView} />
+                <Route path="/post/:id/edit" component={PostCreateEditView} />
                 <Route path="/post/:id" component={PostDetailView} />
                 <Route path="/:category" component={PostListingView} />
               </Switch>
