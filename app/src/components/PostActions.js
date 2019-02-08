@@ -32,9 +32,9 @@ class PostActions extends Component {
    * if detail page is showing -> go to home
    */
   onDeleteCallbackHandler = _ => {
-    const { postId, location, history } = this.props
+    const { postId, postCategory, location, history } = this.props
 
-    if (location.pathname === `/post/${postId}`) history.push('/')
+    if (location.pathname === `/${postCategory}/${postId}`) history.push('/')
   }
 
   render() {

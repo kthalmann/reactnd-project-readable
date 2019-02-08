@@ -12,7 +12,8 @@ class ShowPost extends Component {
       author,
       timestamp,
       voteScore,
-      commentCount
+      commentCount,
+      category
     } = this.props.post
 
     return (
@@ -33,6 +34,7 @@ class ShowPost extends Component {
         </div>
         <PostActions
           postId={id}
+          postCategory={category}
           voteScore={voteScore}
           commentCount={commentCount}
         />
