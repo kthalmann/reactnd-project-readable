@@ -13,7 +13,8 @@ function ShowPost({
     voteScore,
     commentCount,
     category
-  }
+  },
+  onAddComment
 }) {
   return (
     <article className="post article">
@@ -29,7 +30,7 @@ function ShowPost({
       </p>
       <p className="post__body">{body}</p>
       <div className="row">
-        <button onClick={() => this.props.onAddComment()}>Add comment</button>
+        <button onClick={() => onAddComment()}>Add comment</button>
       </div>
       <PostActions
         postId={id}
