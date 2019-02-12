@@ -16,18 +16,6 @@ import {
 } from '../actions/posts';
 
 class PostActions extends Component {
-  onUpvote = _ => {
-    this.props.dispatch(handleUpvotePost(this.props.postId));
-  };
-  onDownvote = _ => {
-    this.props.dispatch(handleDownvotePost(this.props.postId));
-  };
-  onDelete = _ => {
-    this.props.dispatch(
-      handleDeletePost(this.props.postId, this.onDeleteCallbackHandler)
-    );
-  };
-
   /**
    * if detail page is showing -> go to home
    */
@@ -38,7 +26,14 @@ class PostActions extends Component {
   };
 
   render() {
-    const { postId, voteScore, commentCount } = this.props;
+    const {
+      postId,
+      voteScore,
+      commentCount,
+      onUpvote,
+      onDownvote,
+      onDelete
+    } = this.props;
 
     return (
       <div className="post-actions">
@@ -49,14 +44,14 @@ class PostActions extends Component {
 
         <button
           className="post-actions__upvote btn-link"
-          onClick={this.onUpvote}
+          onClick={() => onUpvote(postId)}
         >
           <FiArrowUp />
         </button>
 
         <button
           className="post-actions__downvote btn-link"
-          onClick={this.onDownvote}
+          onClick={() => onDownvote(postId)}
         >
           <FiArrowDown />
         </button>
@@ -68,7 +63,7 @@ class PostActions extends Component {
 
         <button
           className="post-actions__delete btn-link"
-          onClick={this.onDelete}
+          onClick={() => onDelete(postId, this.onDeleteCallbackHandler)}
         >
           <FiTrash2 />
         </button>
@@ -84,4 +79,18 @@ class PostActions extends Component {
   }
 }
 
-export default withRouter(connect()(PostActions));
+function mapDispatchToProps(dispatch) {
+  return {
+    onUpvote: id => {
+      dispatch(handleUpvotePost(id));
+    },
+    onDownvote: id => {
+      dispatch(handleDownvotePost(id));
+    },
+    onDelete: (id, cb) => {
+      dispatch(handleDeletePost(id, cb));
+    }
+  };
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(PostActions));
