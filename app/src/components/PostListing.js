@@ -14,6 +14,7 @@ class PostListing extends Component {
 
     // sort posts by sort method and return only ids
     const postIds = posts
+      .slice()
       .sort((a, b) => b[postSorting] - a[postSorting])
       .map(post => post.id);
 
