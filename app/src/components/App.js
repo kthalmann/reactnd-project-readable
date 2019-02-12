@@ -10,7 +10,7 @@ import CategoryNavigation from './CategoryNavigation';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    this.props.onLoad();
   }
 
   render() {
@@ -44,4 +44,12 @@ function mapStateToProps({ posts }) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    onLoad: _ => {
+      dispatch(handleInitialData());
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
